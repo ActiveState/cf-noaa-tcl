@@ -44,12 +44,12 @@ Package files
 
  * build.tcl
 
-   [http://core.tcl.tk/akupries/kettle](Kettle)-based build system
+   [Kettle](http://core.tcl.tk/akupries/kettle)-based build system
    for the package.
 
  * doc/
 
-   Placeholder for future package documentation.
+   Package documentation, written in [doctools](https://core.tcl.tk/tcllib/doc/trunk/embedded/www/tcllib/files/modules/doctools/doctools_lang_intro.html) markup.
 
  * test/
 
