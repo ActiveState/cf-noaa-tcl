@@ -1,0 +1,61 @@
+[comment {-*- tcl -*- doctools manpage}]
+[manpage_begin cfnoaa n 0.1]
+[include include/module.inc]
+[titledesc {cf::noaa - API}]
+[description]
+[include include/welcome.inc]
+
+[para] This document is the reference manpage for the publicly visible API,
+i.e. the API a user will see, and use.
+
+This API falls into two big sections, for the generation of encoded log messages from Tcl
+data structures on one side, and the parsing of encoded log messages into Tcl structures on
+the other.
+
+[comment {* * ** *** ***** ******** ************* *********************}]
+[section {Parsing encoded log messages}]
+
+[list_begin definitions]
+
+[call [cmd {cf noaa unpack}] [arg bytearray]]
+
+This command parses the encoded log message in the Tcl bytearray
+and returns a Tcl dictionary where each key represents an element of the
+log message.
+
+[para] The possible keys are:
+
+
+[list_end]
+
+[comment {* * ** *** ***** ******** ************* *********************}]
+[section {Generating encoded log messages}]
+
+[list_begin definitions]
+
+[call [cmd {cf noaa pack}] \
+     [arg message] \
+     [arg message_type] \
+     [arg timestamp] \
+     [opt [arg app_id]] \
+     [opt [arg source_type]] \
+     [opt [arg source_instance]]]
+
+This command converts the Tcl arguments representating the parts of a
+log message into a protobuf-encoded binary string and returns this
+bytearray as its result.
+
+[list_begin arguments]
+[arg_def bytearray message]         The message itself.
+[arg_def enum      message_type]    The message type, either [const out] or [const err].
+[arg_def int64     timestamp]       A 64bit timestamp for the message.
+[arg_def string    app_id]          An optional string.
+[arg_def string    source_type]     An optional string.
+[arg_def string    source_instance] An optional string.
+[list_end]
+
+[list_end]
+
+[include include/feedback.inc]
+[manpage_end]
+

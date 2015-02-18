@@ -1,0 +1,288 @@
+
+<html><head>
+<title>cfnoaa_install_guide - cf::noaa</title>
+<style type="text/css"><!--
+    HTML {
+	background: 	#FFFFFF;
+	color: 		black;
+    }
+    BODY {
+	background: 	#FFFFFF;
+	color:	 	black;
+    }
+    DIV.doctools {
+	margin-left:	10%;
+	margin-right:	10%;
+    }
+    DIV.doctools H1,DIV.doctools H2 {
+	margin-left:	-5%;
+    }
+    H1, H2, H3, H4 {
+	margin-top: 	1em;
+	font-family:	sans-serif;
+	font-size:	large;
+	color:		#005A9C;
+	background: 	transparent;
+	text-align:		left;
+    }
+    H1.title {
+	text-align: center;
+    }
+    UL,OL {
+	margin-right: 0em;
+	margin-top: 3pt;
+	margin-bottom: 3pt;
+    }
+    UL LI {
+	list-style: disc;
+    }
+    OL LI {
+	list-style: decimal;
+    }
+    DT {
+	padding-top: 	1ex;
+    }
+    UL.toc,UL.toc UL, UL.toc UL UL {
+	font:		normal 12pt/14pt sans-serif;
+	list-style:	none;
+    }
+    LI.section, LI.subsection {
+	list-style: 	none;
+	margin-left: 	0em;
+	text-indent:	0em;
+	padding: 	0em;
+    }
+    PRE {
+	display: 	block;
+	font-family:	monospace;
+	white-space:	pre;
+	margin:		0%;
+	padding-top:	0.5ex;
+	padding-bottom:	0.5ex;
+	padding-left:	1ex;
+	padding-right:	1ex;
+	width:		100%;
+    }
+    PRE.example {
+	color: 		black;
+	background: 	#f5dcb3;
+	border:		1px solid black;
+    }
+    UL.requirements LI, UL.syntax LI {
+	list-style: 	none;
+	margin-left: 	0em;
+	text-indent:	0em;
+	padding:	0em;
+    }
+    DIV.synopsis {
+	color: 		black;
+	background: 	#80ffff;
+	border:		1px solid black;
+	font-family:	serif;
+	margin-top: 	1em;
+	margin-bottom: 	1em;
+    }
+    UL.syntax {
+	margin-top: 	1em;
+	border-top:	1px solid black;
+    }
+    UL.requirements {
+	margin-bottom: 	1em;
+	border-bottom:	1px solid black;
+    }
+--></style>
+</head>
+<! -- Generated from file '/net/nas1/languages/ActiveTcl/LocalCopyOfExternalSources/cf-noaa/embedded/www/doc/files/cfnoaa_installer.html' by tcllib/doctools with format 'html'
+   -->
+<! -- Copyright &copy; 2015: ActiveState; Andreas Kupries   -- Copyright &copy; 2015 Documentation: ActiveState; Andreas Kupries
+   -->
+<! -- CVS: $Id$ cfnoaa_install_guide.n
+   -->
+<body><div class="doctools">
+<hr> [
+   <a href="../../toc.html">Main Table Of Contents</a>
+| <a href="../toc.html">Table Of Contents</a>
+| <a href="../../index.html">Keyword Index</a>
+ ] <hr>
+<h1 class="title">cfnoaa_install_guide(n) 1 doc &quot;cf::noaa&quot;</h1>
+<div id="name" class="section"><h2><a name="name">Name</a></h2>
+<p>cfnoaa_install_guide - cf::noaa - The Installer's Guide</p>
+</div>
+<div id="toc" class="section"><h2><a name="toc">Table Of Contents</a></h2>
+<ul class="toc">
+<li class="section"><a href="#toc">Table Of Contents</a></li>
+<li class="section"><a href="#synopsis">Synopsis</a></li>
+<li class="section"><a href="#section1">Description</a></li>
+<li class="section"><a href="#section2">Requisites</a>
+<ul>
+<li class="subsection"><a href="#subsection1">Tcl</a></li>
+<li class="subsection"><a href="#subsection2">CriTcl</a></li>
+<li class="subsection"><a href="#subsection3">Kettle</a></li>
+</ul>
+</li>
+<li class="section"><a href="#section3">Build &amp; Installation</a></li>
+<li class="section"><a href="#section4">Bugs, Ideas, Feedback</a></li>
+<li class="section"><a href="#keywords">Keywords</a></li>
+<li class="section"><a href="#category">Category</a></li>
+<li class="section"><a href="#copyright">Copyright</a></li>
+</ul>
+</div>
+<div id="synopsis" class="section"><h2><a name="synopsis">Synopsis</a></h2>
+<div class="synopsis">
+<ul class="requirements">
+<li>package require <b class="pkgname">Tcl 8.5</b></li>
+<li>package require <b class="pkgname">cf::noaa <span class="opt">?0.1?</span></b></li>
+</ul>
+</div>
+</div>
+<div id="section1" class="section"><h2><a name="section1">Description</a></h2>
+<p>Welcome to cf::noaa, a binding to the protobuf (un)marshalling
+C code for cf metron/doppler/noaa messages.</p>
+<p>The audience of this document is anyone wishing to build the
+packages, for either themselves, or others.</p>
+<p>For a developer intending to extend or modify the packages we
+additionally provide</p>
+<ol class="enumerated">
+<li><p><i class="term"><a href="license.html">cf::noaa - License</a></i>.</p></li>
+<li><p><i class="term"><a href="cfnoaa_devguide.html">cf::noaa - The Developer's Guide</a></i>.</p></li>
+</ol>
+<p>Please read <i class="term"><a href="cfnoaa_sources.html">cf::noaa - How To Get The Sources</a></i> first, if that was
+not done already. Here we assume that the sources are already
+available in a directory of your choice.</p>
+</div>
+<div id="section2" class="section"><h2><a name="section2">Requisites</a></h2>
+<p>Before cf::noaa can be build and used a number of requisites must be installed. These are:</p>
+<ol class="enumerated">
+<li><p>The scripting language Tcl.
+       For details see <span class="sectref"><a href="#subsection1">Tcl</a></span>.</p></li>
+<li><p>The <b class="package">critcl</b> package (C embedding) for <b class="syscmd">Tcl</b>.
+       For details see <span class="sectref"><a href="#subsection2">CriTcl</a></span>.</p></li>
+<li><p>The <b class="package">kettle</b> package (build support) for <b class="syscmd">Tcl</b>.
+       For details see <span class="sectref"><a href="#subsection3">Kettle</a></span>.</p></li>
+</ol>
+<p>This list assumes that the machine where cf::noaa is to be installed is
+essentially clean. Of course, if parts of the dependencies listed
+below are already installed the associated steps can be skipped. It is
+still recommended to read their sections though, to validate that the
+dependencies they talk about are indeed installed.</p>
+<div id="subsection1" class="subsection"><h3><a name="subsection1">Tcl</a></h3>
+<p>As we are building a Tcl package that should be pretty much obvious
+that a working Tcl installation is needed, and I will not belabor the
+point.</p>
+<p>Out of the many use whatever you are comfortable with, as long
+as it provides Tcl 8.5, or higher.</p>
+<p>This may be a Tcl installation provided by your operating
+system distribution, from a distribution-independent vendor, or built
+by yurself.</p>
+<p>Myself, I used <a href="http://www.activestate.com">ActiveState's</a>
+ActiveTcl 8.5 distribution during development of the binding, as I am
+most familiar with it.</p>
+<p><em>(Disclosure: I, Andreas Kupries, work for ActiveState,
+maintaining ActiveTcl and TclDevKit for them).</em></p>
+<p>This distribution can be found at
+<a href="http://www.activestate.com/activetcl">http://www.activestate.com/activetcl</a>. Retrieve the archive of
+ActiveTcl 8.5 for your platform and install it as directed by
+ActiveState.</p>
+<p>Assuming that ActiveTcl got installed I usually run the command</p>
+<pre class="example">
+    teacup update
+</pre>
+<p>to install all packages ActiveState provides, and the kitchensink, as
+the distribution itself usually contains only the most important set
+of packages. This ensures that the dependencies for <span class="sectref"><a href="#subsection2">CriTcl</a></span>,
+and cf::noaa are all present, and more.</p>
+<p>If that is not to your liking you have to read the sections for
+<span class="sectref"><a href="#subsection2">CriTcl</a></span>, and cf::noaa to determine the exact set of packages
+required, and install only these using</p>
+<pre class="example">
+    teacup install $packagename
+</pre>
+<p>Both <b class="syscmd">teacup</b> commands above assume that ActiveState's
+TEApot repository at <a href="http://teapot.activestate.com">http://teapot.activestate.com</a> is in the
+list of repositories accessible to <b class="syscmd">teacup</b>. This is automatically
+ensured for the ActiveTcl distribution. Others may have to run</p>
+<pre class="example">
+    teacup archive add http://teapot.activestate.com
+</pre>
+<p>to make this happen.</p>
+<p>For those wishing to build Tcl/Tk on their own, their sources
+can be found at</p>
+<dl class="definitions">
+<dt>Tcl</dt>
+<dd><p><a href="http://core.tcl.tk/tcl/">http://core.tcl.tk/tcl/</a></p></dd>
+<dt>Tk</dt>
+<dd><p><a href="http://core.tcl.tk/tk/">http://core.tcl.tk/tk/</a></p></dd>
+</dl>
+</div>
+<div id="subsection2" class="subsection"><h3><a name="subsection2">CriTcl</a></h3>
+<p>To build cf::noaa the tool <b class="syscmd">critcl</b> is required.</p>
+<p>cf::noaa's build systems accepts it either as an application
+found in the PATH, or as a Tcl package available to the <b class="syscmd">tclsh</b>
+used to run their build &amp; installation processes.</p>
+<p>cf::noaa <em>must</em> have version 3.1.13 and associated helper packages.</p>
+<p>The relevant github repository can be found at
+<a href="http://andreas-kupries.github.com/critcl">http://andreas-kupries.github.com/critcl</a>.</p>
+<p>The relevant repository branch is <em>master</em>.</p>
+<p>At the above url is also an explanation on how to build and
+install CriTcl, including a list of its dependencies.</p>
+<p>Its instructions will not be repeated here. If there are
+problems with their directions please file a bug against the critcl
+project, and not cf::noaa.</p>
+</div>
+<div id="subsection3" class="subsection"><h3><a name="subsection3">Kettle</a></h3>
+<p>To build cf::noaa the build support package <b class="package">kettle</b> is
+required, as is the accompanying application.</p>
+<p>This package must be available to the <b class="syscmd">tclsh</b> used to
+run cf::noaa's build &amp; installation process.</p>
+<p>The package's fossil repository can be found at
+<a href="http://core.tcl.tk/akupries/kettle">http://core.tcl.tk/akupries/kettle</a>.</p>
+<p>The relevant repository branch is <em>trunk</em>.</p>
+<p>Kettle has a build and installation guide much like this one
+for cf::noaa, which can be found at the above site and explains how to
+retrieve its sources and build the package, which dependencies are
+required, etc. The direct link to this guide is
+<a href="http://core.tcl.tk/akupries/kettle/doc/tip/embedded/www/doc/files/kettle_installer.html">http://core.tcl.tk/akupries/kettle/doc/tip/embedded/www/doc/files/kettle_installer.html</a></p>
+<p>Its instructions will not be repeated here. If there are
+problems with their directions please file a bug against the Kettle
+project, and not cf::noaa.</p>
+</div>
+</div>
+<div id="section3" class="section"><h2><a name="section3">Build &amp; Installation</a></h2>
+<p>To install cf::noaa simply run</p>
+<pre class="example">
+    /path/to/tclsh8.5 /path/to/cf-noaa/build.tcl install
+</pre>
+<p>where &quot;<b class="file">/path/to/tclsh8.5</b>&quot; is the tclsh of your Tcl installation, and
+&quot;<b class="file">/path/to/cf::noaa</b>&quot; the location of the cf::noaa sources on your system.</p>
+<p>This builds all packages and then places them in a directory where the
+<b class="cmd">tclsh8.5</b> will find them.</p>
+<p>On Windows you can invoke the file &quot;<b class="file">build.tcl</b>&quot; with a
+double-click.  This will pop up a small graphical interface for
+entering the destination and performing the installation. This
+handling of a double-click is restricted to Windows only however.</p>
+<p>On unix the same GUI is acessible by invoking &quot;<b class="file">build.tcl</b>&quot; without
+any arguments.</p>
+<p>To get help about the methods of &quot;<b class="file">build.tcl</b>&quot;, and their complete
+syntax, invoke  &quot;<b class="file">build.tcl</b>&quot; with argument <b class="method">help</b>, i.e., like</p>
+<pre class="example">
+    /path/to/tclsh8.5 /path/to/cf-noaa/build.tcl help
+</pre>
+</div>
+<div id="section4" class="section"><h2><a name="section4">Bugs, Ideas, Feedback</a></h2>
+<p>This document, and the package it describes, will undoubtedly contain
+bugs and other problems.
+Please report such at the <a href="http://github.com/ActiveState/cf-noaa-tcl">cf::noaa issue tracker</a>.
+Please also report any ideas for enhancements you may have for either
+package and/or documentation.</p>
+</div>
+<div id="keywords" class="section"><h2><a name="keywords">Keywords</a></h2>
+<p><a href="../../index.html#key4">data exchange format</a>, <a href="../../index.html#key7">deserialization</a>, <a href="../../index.html#key1">emitting noaa</a>, <a href="../../index.html#key2">marshalling noaa</a>, <a href="../../index.html#key6">noaa</a>, <a href="../../index.html#key10">parsing noaa</a>, <a href="../../index.html#key8">protobuf</a>, <a href="../../index.html#key0">scanning noaa</a>, <a href="../../index.html#key3">serialization</a>, <a href="../../index.html#key5">transfer format</a>, <a href="../../index.html#key11">unmarshalling noaa</a>, <a href="../../index.html#key9">writing noaa</a></p>
+</div>
+<div id="category" class="section"><h2><a name="category">Category</a></h2>
+<p>library binding</p>
+</div>
+<div id="copyright" class="section"><h2><a name="copyright">Copyright</a></h2>
+<p>Copyright &copy; 2015: ActiveState; Andreas Kupries<br>
+Copyright &copy; 2015 Documentation: ActiveState; Andreas Kupries</p>
+</div>
+</div></body></html>

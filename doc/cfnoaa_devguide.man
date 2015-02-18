@@ -1,0 +1,127 @@
+[comment {-*- tcl -*- doctools manpage}]
+[manpage_begin cfnoaa_devguide n 1]
+[include include/module.inc]
+[titledesc {cf::noaa - The Developer's Guide}]
+[description]
+[include include/welcome.inc]
+
+[para] This document is a guide for developers working on cf::noaa,
+i.e. maintainers fixing bugs, extending the package's functionality,
+etc.
+
+[para]
+
+Please read
+
+[list_begin enum]
+[enum] [term {cf::noaa - License}],
+[enum] [term {cf::noaa - How To Get The Sources}], and
+[enum] [term {cf::noaa - The Installer's Guide}]
+[list_end]
+
+first, if that was not done already.
+
+Here we assume that the sources are already available in a directory
+of your choice, and that you not only know how to build and install
+them, but also have all the necessary requisites to actually do
+so. The guide to the sources in particular also explains which source
+code management system is used, where to find it, how to set it up,
+etc.
+
+[section {Developing for cf::noaa}]
+
+[comment @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@]
+[subsection {Directory structure}]
+
+[list_begin definitions][comment {___1___}]
+
+[comment =====================================================================]
+[def Helpers]
+
+[comment =====================================================================]
+[def Documentation]
+
+[list_begin definitions]
+[def [file doc/]]
+
+This directory contains the documentation sources. The texts are written
+in [term doctools] format.
+
+[def [file embedded/]]
+
+This directory contains the documentation converted to regular manpages
+(nroff) and HTML.
+
+[list_end]
+
+[comment =====================================================================]
+[def {Package Code, General structure}]
+
+[list_begin definitions]
+[def [file noaa.tcl]]
+
+This is the master file of the package. Based on [cmd critcl] (v3.1.13) it
+contain alls the necessary declarations to build the package.
+
+[def [file policy.tcl]]
+
+This is the companion to the [file noaa.tcl] file which implements
+the higher-level interfaces on top of the C-based primitive
+operations, and determines policies. It currently only sets up the
+API ensemble commands.
+
+[para]
+
+The documentation (see [file doc/]) describes the higher-level API,
+
+[def [file common.tcl]]
+
+Common global code shared to both parsing and generator sides.
+
+[def [file pack.tcl]]
+
+The generator side of the package, a command taking log message parts
+and returning a Tcl bytearray holding the protobuf encoded data.
+
+[def [file unpack.tcl]]
+
+The parser side of the package, a command taking a Tcl bytearray
+containing a protobuf encoded log message and returning a Tcl
+dictionary with the decoded fields.
+
+[def [file protobuf-c/]]
+
+A copy of the protobuf-c supporting generic runtime library.
+Built as part of cf::noaa.
+
+[list_end]
+
+[comment =====================================================================]
+[def {Package Code, Per Package}]
+
+[list_begin definitions]
+
+[def [package cf::noaa]]
+
+[list_begin definitions]
+[def [file noaa.tcl]]
+[def [file policy.tcl]]
+[def [file common.tcl]]
+[def [file pack.tcl]]
+[def [file unpack.tcl]]
+[list_end]
+
+
+[def [package protobuf-c]]
+
+[list_begin definitions]
+[def [file protobuf-c/]]
+[list_end]
+
+
+[list_end]
+
+[list_end][comment {___1___}]
+
+[include include/feedback.inc]
+[manpage_end]

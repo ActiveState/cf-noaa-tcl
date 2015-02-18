@@ -1,0 +1,66 @@
+[comment {-*- tcl -*- doctools manpage}]
+[manpage_begin cfnoaa_sources n 1]
+[include include/module.inc]
+[titledesc {cf::noaa - How To Get The Sources}]
+[description]
+[include include/welcome.inc]
+
+[para] The audience of this document is anyone wishing to either have
+just a look at cf::noaa's source code, or build the packages, or to
+extend and modify them.
+
+[para] For builders and developers we additionally provide
+
+[list_begin enum]
+[enum] [term {cf::noaa - License}].
+[enum] [term {cf::noaa - The Installer's Guide}].
+[enum] [term {cf::noaa - The Developer's Guide}].
+[list_end]
+
+respectively.
+
+[section {Source Location}]
+
+The official repository for cf::noaa can be found at
+[uri http://github.com/ActiveState/cf-noaa-tcl]
+
+[section Retrieval]
+
+Assuming that you simply wish to look at the sources, or build a
+specific revision, the easiest way of retrieving it is to:
+
+[list_begin enum]
+[enum] Go to this site
+[enum] and use the standard github functionality
+[enum] to choose the revision you wish to have and 
+[enum] get a copy of this revision in the format of your choice.
+[list_end]
+
+[section {Source Code Management}]
+
+For the curious (or a developer-to-be), the sources are managed by the
+[uri http://www.git-scm.com {Git SCM}].
+
+Binaries for popular platforms can be found directly at its
+[uri http://www.git-scm.com/downloads {download page}].
+
+[para]
+
+With that tool available the full history can be retrieved via:
+
+[example {
+    git clone git@github.com:ActiveState/cf-noaa-tcl.git
+}]
+
+followed by
+
+[example {
+    cd cf-noaa
+    git pull master
+}]
+
+to get a checkout of the head of the trunk.
+
+[include include/feedback.inc]
+[manpage_end]
+

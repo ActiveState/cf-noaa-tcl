@@ -1,0 +1,31 @@
+#!/usr/bin/env tclsh
+# -*- tcl -*-
+package require Tcl 8.5
+
+puts "debug    [package require debug 1.0.5]"
+puts "cf::noaa [package require cf::noaa]"
+puts ""
+
+set message         {container complete}
+set mtype           out
+set tstamp          [clock seconds]
+set app_id          node-env
+set source_type     STG
+set source_instance 4
+
+set m [cf noaa pack \
+	   $message         \
+	   $mtype           \
+	   $tstamp          \
+	   $app_id          \
+	   $source_type     \
+	   $source_instance]
+
+puts "Encoded ([string length $m] bytes):"
+puts [debug hexl $m {> }]
+puts ""
+
+puts Decoded:
+puts [debug pdict [cf noaa unpack $m]]
+puts ""
+exit

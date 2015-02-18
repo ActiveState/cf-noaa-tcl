@@ -1,0 +1,41 @@
+[comment {-*- tcl -*- doctools manpage}]
+[manpage_begin cfnoaa_introduction n 1]
+[include include/module.inc]
+[titledesc {cf::noaa - Introduction to cf::noaa}]
+[description]
+[include include/welcome.inc]
+
+[comment {
+[para]
+What are your goals which drove you here ?
+
+[list_begin enumerated]
+[enum]
+[list_end]
+}]
+
+[section {Related Documents}]
+
+[list_begin enum]
+[enum] [term {cf::noaa - License}].
+[enum] [term {cf::noaa - How To Get The Sources}].
+[enum] [term {cf::noaa - The Installer's Guide}].
+[enum] [term {cf::noaa - The Developer's Guide}].
+[enum] [term {cf::noaa - API}]
+[list_end]
+
+[section {System Architecture}]
+
+The system's structure is not very complicated.
+
+[para] At the bottom is the protobuf-c support library doing
+the heavy lifting for both parsing and generation of
+protobuf encodings.
+
+[para] cf::noaa sits on top of that, with two
+distinguishable parts, performing parsing and
+generation for noaa log messages.
+
+[include include/feedback.inc]
+[manpage_end]
+
