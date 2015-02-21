@@ -1,0 +1,6 @@
+
+envelope <--|<-- heartbeat <-- uuid
+	    |<-- http      <-- uuid
+	    |<-- log
+	    |<-- metric    <-- uuid
+	    |<-- error
