@@ -1,4 +1,21 @@
 /*
+ * (c) 2015 ActiveState, Andreas Kupries - Macros and code for debug narrative.
+ */
+
+#define PB_DEBUG 0
+
+#ifndef PB_DEBUG
+#define PB_DEBUG 0
+#endif
+#if PB_DEBUG
+#include <stdio.h>
+# define PB_TRACE printf
+# define PROTOBUF_C_UNPACK_ERROR printf
+#else
+# define PB_TRACE(...)
+#endif
+
+/*
  * Copyright (c) 2008-2014, Dave Benson and the protobuf-c authors.
  * All rights reserved.
  *
@@ -2894,6 +2911,8 @@ protobuf_c_message_unpack(const ProtobufCMessageDescriptor *desc,
 
 	ASSERT_IS_MESSAGE_DESCRIPTOR(desc);
 
+	PB_TRACE ("len = %d, expecting \"%s\"\n", len, desc->name);
+
 	if (allocator == NULL)
 		allocator = &protobuf_c__allocator;
 
@@ -2931,6 +2950,18 @@ protobuf_c_message_unpack(const ProtobufCMessageDescriptor *desc,
 		const ProtobufCFieldDescriptor *field;
 		ScannedMember tmp;
 
+		PB_TRACE ("* tag=%d, wiretype=%d \"%s\", taken %d of %d\n", tag, wire_type,
+			  wire_type == PROTOBUF_C_WIRE_TYPE_VARINT
+			  ? "varint"
+			  : (wire_type == PROTOBUF_C_WIRE_TYPE_64BIT
+			     ? "64bit"
+			     : (wire_type == PROTOBUF_C_WIRE_TYPE_LENGTH_PREFIXED
+				? "length-prefixed"
+				: (wire_type == PROTOBUF_C_WIRE_TYPE_32BIT
+				   ? "32bit"
+				   : "??"))),
+			  used, rem);
+
 		if (used == 0) {
 			PROTOBUF_C_UNPACK_ERROR("error parsing tag/wiretype at offset %u",
 						(unsigned) (at - data));
@@ -2958,6 +2989,17 @@ protobuf_c_message_unpack(const ProtobufCMessageDescriptor *desc,
 			field = last_field;
 		}
 
+		PB_TRACE ("  %s field \"%s\"\n", 
+			  !field
+			  ? "........"
+			  : (field->label == PROTOBUF_C_LABEL_REQUIRED
+			     ? "required"
+			     : (field->label == PROTOBUF_C_LABEL_OPTIONAL
+				? "optional"
+				: "repeated")),
+			  field ? field->name : "<unknown>"
+			  );
+
 		if (field != NULL && field->label == PROTOBUF_C_LABEL_REQUIRED)
 			REQUIRED_FIELD_BITMAP_SET(last_field_index);
 
@@ -2983,6 +3025,8 @@ protobuf_c_message_unpack(const ProtobufCMessageDescriptor *desc,
 				goto error_cleanup_during_scan;
 			}
 			tmp.len = i + 1;
+
+			PB_TRACE ("  data   length %d\n", tmp.len);
 			break;
 		}
 		case PROTOBUF_C_WIRE_TYPE_64BIT:
@@ -2992,6 +3036,7 @@ protobuf_c_message_unpack(const ProtobufCMessageDescriptor *desc,
 				goto error_cleanup_during_scan;
 			}
 			tmp.len = 8;
+			PB_TRACE ("  data   length %d\n", tmp.len);
 			break;
 		case PROTOBUF_C_WIRE_TYPE_LENGTH_PREFIXED: {
 			size_t pref_len;
@@ -3002,6 +3047,9 @@ protobuf_c_message_unpack(const ProtobufCMessageDescriptor *desc,
 				goto error_cleanup_during_scan;
 			}
 			tmp.length_prefix_len = pref_len;
+
+			PB_TRACE ("  prefix length %d\n", pref_len);
+			PB_TRACE ("  data   length %d\n", tmp.len-pref_len);
 			break;
 		}
 		case PROTOBUF_C_WIRE_TYPE_32BIT:
@@ -3011,6 +3059,7 @@ protobuf_c_message_unpack(const ProtobufCMessageDescriptor *desc,
 				goto error_cleanup_during_scan;
 			}
 			tmp.len = 4;
+		PB_TRACE ("  data   length %d\n", tmp.len);
 			break;
 		default:
 			PROTOBUF_C_UNPACK_ERROR("unsupported tag %u at offset %u",
@@ -3068,6 +3117,9 @@ protobuf_c_message_unpack(const ProtobufCMessageDescriptor *desc,
 	/* allocate space for repeated fields, also check that all required fields have been set */
 	for (f = 0; f < desc->n_fields; f++) {
 		const ProtobufCFieldDescriptor *field = desc->fields + f;
+
+		PB_TRACE ("- setup %d/%d \"%s\"\n", f, desc->n_fields, field->name);
+
 		if (field->label == PROTOBUF_C_LABEL_REPEATED) {
 			size_t siz =
 			    sizeof_elt_in_repeated_array(field->type);
@@ -3096,6 +3148,7 @@ protobuf_c_message_unpack(const ProtobufCMessageDescriptor *desc,
 			if (field->default_value == NULL &&
 			    !REQUIRED_FIELD_BITMAP_IS_SET(f))
 			{
+				PB_TRACE ("  this field is missing\n");
 				CLEAR_REMAINING_N_PTRS();
 				PROTOBUF_C_UNPACK_ERROR("message '%s': missing required field '%s'",
 							desc->name, field->name);
