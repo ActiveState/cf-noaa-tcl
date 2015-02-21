@@ -3148,10 +3148,12 @@ protobuf_c_message_unpack(const ProtobufCMessageDescriptor *desc,
 			if (field->default_value == NULL &&
 			    !REQUIRED_FIELD_BITMAP_IS_SET(f))
 			{
+			        const char* missing_name = field->name;
 				PB_TRACE ("  this field is missing\n");
+				/* Remember because the CLEAR... will move 'field' to the last. */
 				CLEAR_REMAINING_N_PTRS();
 				PROTOBUF_C_UNPACK_ERROR("message '%s': missing required field '%s'",
-							desc->name, field->name);
+							desc->name, missing_name);
 				goto error_cleanup;
 			}
 		}
