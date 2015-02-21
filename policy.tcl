@@ -6,10 +6,21 @@
 # # ## ### ##### ######## #############
 ## Conveniences - Ensemble command.
 
-namespace eval ::cf::noaa {
-    namespace export pack unpack
+::apply {{} {
+    foreach m {
+	envelope error heartbeat
+	httpstart httpstop httpstartstop
+	logmessage valuemetric counterevent
+	containermetric uuid
+    } {
+	namespace eval $m {
+	    namespace export pack unpack
+	    namespace ensemble create
+	}
+	namespace export $m
+    }
     namespace ensemble create
-}
+} ::cf::noaa}
 
 namespace eval ::cf {
     namespace export noaa

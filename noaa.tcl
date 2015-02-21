@@ -1,7 +1,7 @@
 # -*- tcl -*-
 ##
 # A Tcl binding to the protobuf (un)marshalling C code for
-# metron/doppler/noaa messages.
+# metron/doppler/noaa/dropsonde messages.
 #
 # Note that this does not export any C APIs as stubs.
 # It simply exposes the (un)marshalling functionality to Tcl scripts.
@@ -36,19 +36,30 @@ critcl::license \
     {BSD licensed}
 
 critcl::summary \
-    {Tcl Binding to noaa (un)marshalling}
+    {Tcl Binding to noaa dropsonde (un)marshalling}
 
 critcl::description {
     This package is a binding to the protobuf (un)marshalling
-    C code for metron/doppler/noaa messages.
+    C code for metron/doppler/noaa/dropsonde messages.
 }
 
-critcl::subject protobuf noaa
-critcl::subject {writing noaa}     {scanning noaa}
-critcl::subject {emitting noaa}    {parsing noaa}
-critcl::subject {marshalling noaa} {unmarshalling noaa}
+#
+critcl::subject protobuf noaa metron doppler dropsonde
 critcl::subject serialization      deserialization 
 critcl::subject {data exchange format} {transfer format}
+#
+critcl::subject {emitting doppler}      {parsing doppler}
+critcl::subject {emitting dropsonde}    {parsing dropsonde}
+critcl::subject {emitting metron}       {parsing metron}
+critcl::subject {emitting noaa}         {parsing noaa}
+critcl::subject {marshalling doppler}   {unmarshalling doppler}
+critcl::subject {marshalling dropsonde} {unmarshalling dropsonde}
+critcl::subject {marshalling metron}    {unmarshalling metron}
+critcl::subject {marshalling noaa}      {unmarshalling noaa}
+critcl::subject {writing doppler}       {scanning doppler}
+critcl::subject {writing dropsonde}     {scanning dropsonde}
+critcl::subject {writing metron}        {scanning metron}
+critcl::subject {writing noaa}          {scanning noaa}
 
 # # ## ### ##### ######## #############
 ## Implementation.
@@ -64,8 +75,8 @@ critcl::tcl 8.5
 # Note: Might have slow processing from critcl starkit, large (90K)
 # file, and non-accelerated md5
 
-critcl::cheaders  log.h
-critcl::csources  log.c protobuf-c/protobuf-c.c
+critcl::cheaders  -I.
+critcl::csources  coder/*.pb-c.c protobuf-c/protobuf-c.c
 
 # # ## ### ##### ######## #############
 ## Define a few conveniences for use (ensemble cmd).
@@ -79,7 +90,7 @@ critcl::tsources policy.tcl
 ## Commands and bindings for the (un)marshall code.
 
 critcl::source common.tcl ; # shared definitions
-critcl::source pack.tcl   ; # marshalling
+#critcl::source pack.tcl   ; # marshalling - disabled, incomplete
 critcl::source unpack.tcl ; # unmarshalling
 
 # # ## ### ##### ######## #############
@@ -92,7 +103,7 @@ if {![critcl::load]} {
 
 # # ## ### ##### ######## #############
 
-package provide cf::noaa 0.1
+package provide cf::noaa 0.2
 return
 
 # vim: set sts=4 sw=4 tw=80 et ft=tcl:
